@@ -1,0 +1,30 @@
+
+https://docs.rke2.io/install/quickstart
+
+# Add utils tp PATH
+/var/lib/rancher/rke2/bin/
+
+sudo mkdir -p ~/.kube/cfg
+sudo cp /etc/rancher/rke2/rke2.yaml ~/.kube/cfg
+sudo chmod 664 ~/.kube/cfg/rke2.yaml
+
+
+# Add to profile
+#export KUBECONFIG=/etc/rancher/rke2/rke2.yaml
+export KUBECONFIG=~/.kube/cfg/rke2.yaml
+
+
+systemctl start|stop|restart rke2-server
+
+kk get pods
+kk describe pod <name>
+kk logs <pod-name>  [--previous]
+
+kk get nodes
+kk describe node <name>
+
+kk get cronjob
+kk delete cronjob hello
+
+# delete everything
+kk delete replicasets,deployments,jobs,services,pods --all
