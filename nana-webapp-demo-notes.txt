@@ -1,3 +1,6 @@
+echo -n mongouser |base64
+
+
 kk get --help
 
 kk get all
