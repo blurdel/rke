@@ -1,0 +1,25 @@
+kk get --help
+
+kk get all
+
+kk get configmap
+kk get secret
+
+kk get pod
+
+kk describe service webapp-service         # from get all
+kk describe pod webapp-deploymeny-asdfcvb  # from get all
+
+kk get pod
+kk logs webapp-deploymeny-asdfcvb     # from get
+kk logs webapp-deploymeny-asdfcvb -f  # to stream log
+
+
+# Get IP address
+kk get svc|service
+
+# gives IP
+minicube ip
+
+# Same as above, gives you the INTERNAL-IP 
+kk get node -o wide
