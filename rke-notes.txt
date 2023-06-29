@@ -23,8 +23,10 @@ kk logs <pod-name>  [--previous]
 kk get nodes
 kk describe node <name>
 
+kk port-forward <pod-name> src-port:dest-port
+
 kk get cronjob
 kk delete cronjob hello
 
 # delete everything
-kk delete replicasets,deployments,jobs,services,pods --all
+kk delete replicasets,deployments,jobs,services,pods,configmaps,secrets --all
