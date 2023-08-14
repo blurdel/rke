@@ -16,6 +16,8 @@ export KUBECONFIG=~/.kube/cfg/rke2.yaml
 
 systemctl start|stop|restart rke2-server
 
+kubectl config set-context --current --namespace=username-dev
+
 kk get pods
 kk describe pod <name>
 kk logs <pod-name>  [--previous]
@@ -29,4 +31,6 @@ kk get cronjob
 kk delete cronjob hello
 
 # delete everything
+kubectl delete all --all
+
 kk delete replicasets,deployments,jobs,services,pods,configmaps,secrets --all
