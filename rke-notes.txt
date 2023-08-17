@@ -49,3 +49,6 @@ kk delete replicasets,deployments,jobs,services,pods,configmaps,secrets --all
 
 # Can start containers
 kk run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword
+
+# nslookup will fail if firewall is enabled on the host
+nslookup mysql 
