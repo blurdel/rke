@@ -16,21 +16,32 @@ export KUBECONFIG=~/.kube/cfg/rke2.yaml
 
 systemctl start|stop|restart rke2-server
 
-kubectl config set-context --current --namespace=username-dev
+kk config set-context --current --namespace=username-dev
 
 kk get pods
 kk describe pod <name>
+kk get <pod-name> -o wide  # See IP address endpoints of service
 kk logs <pod-name>  [--previous]
+
+kk get service
+kk describe service <name>
 
 kk get nodes
 kk describe node <name>
 
+
+# Write deployment yaml
+kk get deployment <name> -o yaml > file.yaml
+
+# Port forwarding
 kk port-forward <pod-name> src-port:dest-port
+
 
 kk get cronjob
 kk delete cronjob hello
 
 # delete everything
-kubectl delete all --all
+kk delete all --all
 
+# delete stuff
 kk delete replicasets,deployments,jobs,services,pods,configmaps,secrets --all
