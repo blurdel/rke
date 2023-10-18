@@ -18,7 +18,7 @@ systemctl start|stop|restart rke2-server
 
 kk config set-context --current --namespace=username-dev
 
-kk get pods
+kk get pods [-l app=mysql]
 kk describe pod <name>
 kk get <pod-name> -o wide  # See IP address endpoints of service
 kk logs <pod-name>  [--previous]
@@ -32,6 +32,10 @@ kk describe node <name>
 
 # Write deployment yaml
 kk get deployment <name> -o yaml > file.yaml
+
+kk -n <NAMESPACE> get pods <POD_NAME> -o jsonpath="{..image}"
+kk logs pod/xxxx --all-containers
+
 
 # Port forwarding
 kk port-forward <pod-name> src-port:dest-port
