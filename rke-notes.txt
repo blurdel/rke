@@ -6,7 +6,9 @@ https://docs.rke2.io/install/quickstart
 
 sudo mkdir -p ~/.kube/cfg
 sudo cp /etc/rancher/rke2/rke2.yaml ~/.kube/cfg
-sudo chmod 664 ~/.kube/cfg/rke2.yaml
+#sudo chmod 644 ~/.kube/cfg/rke2.yaml
+sudo chown $(id -u):$(id -g) ~/.kube/cfg
+sudo chown -R $(id -u):$(id -g) ~/.kube/
 
 
 # Add to profile
