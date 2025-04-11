@@ -10,20 +10,28 @@ sudo cp /etc/rancher/rke2/rke2.yaml ~/.kube/cfg
 sudo chown $(id -u):$(id -g) ~/.kube/cfg
 sudo chown -R $(id -u):$(id -g) ~/.kube/
 
-
 # Add to profile
 #export KUBECONFIG=/etc/rancher/rke2/rke2.yaml
 export KUBECONFIG=~/.kube/cfg/rke2.yaml
 
-
 systemctl start|stop|restart rke2-server
 
+----------------------------------------
+alias kk=kubectl
+
+# Contexts
+kk config get-contexts
+kk config set-context --current --namespace=<ns>
 kk config set-context --current --namespace=username-dev
 
+# Pods
 kk get pods [-l app=mysql]
 kk describe pod <name>
-kk get <pod-name> -o wide  # See IP address endpoints of service
-kk logs <pod-name>  [--previous]
+kk get <pod> -o wide  # See IP address endpoints of service
+
+# View logs
+kk logs [-n ns] <pod> [-c container]
+kk logs <pod>  [--previous]
 
 kk get service
 kk describe service <name>
@@ -31,6 +39,11 @@ kk describe service <name>
 kk get nodes
 kk describe node <name>
 
+# Attach to running pod
+kk exec -it [-n ns] <pod> -- <cmd>
+
+# Start container
+kk run -it --rm --image=mysql:8.4.0 --restart=Never mysql-client -- mysql -h mysql
 
 # Write deployment yaml
 kk get deployment <name> -o yaml > file.yaml
@@ -51,10 +64,6 @@ kk delete all --all
 
 # delete stuff
 kk delete replicasets,deployments,jobs,services,pods,configmaps,secrets --all
-
-
-# Can start containers
-kk run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword
 
 # nslookup will fail if firewall is enabled on the host
 nslookup mysql 
