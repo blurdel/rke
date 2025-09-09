@@ -1,0 +1,27 @@
+
+helm repo list
+helm repo add <REPOSITORY_NAME> <REPOSITORY_URL>
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+helm search repo bitnami
+
+helm list -a
+
+helm create <chart>
+
+helm install <release> <chart>
+helm install <release> --debug --dry-run <chart>
+helm uninstall <release>
+
+helm diff revision <chart> <rev1> <rev2>
+helm upgrade <release> <chart>
+helm rollback <release> <revision>
+
+# Checks
+helm template <chart>
+helm lint <chart>
+
+
+helm dependency update <dir>
+helm package <dir>
+helm push-artifactory <chart> <repo>
