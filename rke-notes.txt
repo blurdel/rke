@@ -12,7 +12,7 @@ sudo chown -R $(id -u):$(id -g) ~/.kube/
 
 # Add to profile
 #export KUBECONFIG=/etc/rancher/rke2/rke2.yaml
-export KUBECONFIG=~/.kube/cfg/rke2.yaml
+export KUBECONFIG=~/.kube/config
 
 systemctl start|stop|restart rke2-server
 
@@ -67,3 +67,8 @@ kk delete replicasets,deployments,jobs,services,pods,configmaps,secrets --all
 
 # nslookup will fail if firewall is enabled on the host
 nslookup mysql 
+
+# Add Rancher
+KUBECONFIG=$HOME/.kube/config:$HOME/.rancher-desktop/lima/_default/kubeconfig.yaml kubectl config view --flatten > /tmp/config-merged
+mv /tmp/config-merged ~/.kube/config
+
