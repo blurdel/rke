@@ -13,6 +13,8 @@ helm install <release> <chart>
 helm install <release> --debug --dry-run <chart>
 helm uninstall <release>
 
+helm get manifest <release>
+
 helm diff revision <chart> <rev1> <rev2>
 helm upgrade <release> <chart>
 helm rollback <release> <revision>
