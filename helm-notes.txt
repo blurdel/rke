@@ -20,8 +20,11 @@ helm upgrade <release> <chart>
 helm rollback <release> <revision>
 
 # Checks
-helm template <chart>
 helm lint <chart>
+helm template <chart>
+helm template <release> <chart> -f path/to/values.yaml
+- or
+helm template --replace <chart> --values path/to/values.yaml
 
 
 helm dependency update <dir>
