@@ -5,70 +5,12 @@ https://docs.rke2.io/install/quickstart
 /var/lib/rancher/rke2/bin/
 
 sudo mkdir -p ~/.kube/cfg
-sudo cp /etc/rancher/rke2/rke2.yaml ~/.kube/cfg
+sudo cp /etc/rancher/rke2/rke2.yaml ~/.kube/config
 #sudo chmod 644 ~/.kube/cfg/rke2.yaml
 sudo chown $(id -u):$(id -g) ~/.kube/cfg
 sudo chown -R $(id -u):$(id -g) ~/.kube/
 
 # Add to profile
-#export KUBECONFIG=/etc/rancher/rke2/rke2.yaml
 export KUBECONFIG=~/.kube/config
 
 systemctl start|stop|restart rke2-server
-
-----------------------------------------
-alias kk=kubectl
-
-# Contexts
-kk config get-contexts
-kk config set-context --current --namespace=<ns>
-kk config set-context --current --namespace=username-dev
-
-# Pods
-kk get pods [-l app=mysql]
-kk describe pod <name>
-kk get <pod> -o wide  # See IP address endpoints of service
-
-# View logs
-kk logs [-n ns] <pod> [-c container]
-kk logs <pod>  [--previous]
-
-kk get service
-kk describe service <name>
-
-kk get nodes
-kk describe node <name>
-
-# Attach to running pod
-kk exec -it [-n ns] <pod> -- <cmd>
-
-# Start container
-kk run -it --rm --image=mysql:8.4.0 --restart=Never mysql-client -- mysql -h mysql
-
-# Write deployment yaml
-kk get deployment <name> -o yaml > file.yaml
-
-kk -n <NAMESPACE> get pods <POD_NAME> -o jsonpath="{..image}"
-kk logs pod/xxxx --all-containers
-
-
-# Port forwarding
-kk port-forward <pod-name> src-port:dest-port
-
-
-kk get cronjob
-kk delete cronjob hello
-
-# delete everything
-kk delete all --all
-
-# delete stuff
-kk delete replicasets,deployments,jobs,services,pods,configmaps,secrets --all
-
-# nslookup will fail if firewall is enabled on the host
-nslookup mysql 
-
-# Add Rancher
-KUBECONFIG=$HOME/.kube/config:$HOME/.rancher-desktop/lima/_default/kubeconfig.yaml kubectl config view --flatten > /tmp/config-merged
-mv /tmp/config-merged ~/.kube/config
-
