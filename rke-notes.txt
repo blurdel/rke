@@ -6,11 +6,10 @@ https://docs.rke2.io/install/quickstart
 
 sudo mkdir -p ~/.kube/cfg
 sudo cp /etc/rancher/rke2/rke2.yaml ~/.kube/config
-#sudo chmod 644 ~/.kube/cfg/rke2.yaml
-sudo chown $(id -u):$(id -g) ~/.kube/cfg
 sudo chown -R $(id -u):$(id -g) ~/.kube/
 
 # Add to profile
 export KUBECONFIG=~/.kube/config
 
-systemctl start|stop|restart rke2-server
+systemctl stop|disable firewalld
+systemctl start|enable rke2-server
