@@ -1,0 +1,43 @@
+# Rocky 8 had issues with latest version
+# This will install a specific version
+
+
+sudo systemctl stop rke2-server
+
+/usr/bin/rke2-uninstall.sh
+
+sudo rm -f /usr/local/bin/rke2*
+sudo rm -f /etc/systemd/system/rke2-server.service
+sudo systemctl daemon-reload
+
+sudo rm -rf /var/lib/rancher/rke2
+sudo rm -rf /etc/rancher/rke2
+sudo rm -rf /run/containerd
+
+
+curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION=v1.34.9+rke2r1 sh -
+
+    curl -sfL https://api.github.com/repos/rancher/rke2/releases | grep tag_name | head
+
+sudo systemctl enable rke2-server
+sudo systemctl start rke2-server
+
+
+
+# To lock your version to prevents accidental upgrades:
+sudo mkdir -p /etc/rancher/rke2
+sudo vi /etc/rancher/rke2/config.yaml
+
+#Add
+install-rke2-version: v1.34.9+rke2r1
+
+
+# Lock RPMs
+sudo dnf install -y 'dnf-command(versionlock)'
+sudo dnf versionlock add rke2-server rke2-agent
+dnf versionlock list
+
+
+# Did I lock code?
+dnf versionlock list | grep -i code
+

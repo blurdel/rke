@@ -1,0 +1,20 @@
+
+# Docker install that wont interfere with k8s
+# You can safely install Docker just as a build tool, as long as you don’t try to make it part of Kubernetes.
+
+
+sudo dnf install -y dnf-utils
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+sudo systemctl enable --now docker
+
+
+# docker post-install
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+
+docker version
+docker run hello-world
